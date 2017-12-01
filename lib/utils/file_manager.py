@@ -8,15 +8,23 @@ class FileManager:
         self.input_dir = input_dir
         self.output_dir = output_dir
 
+    def read_files_in_line(self, file_names: list) -> dict:
+        result = dict()
+        for file_name in file_names:
+            with open(file=os.path.join(self.input_dir, file_name), encoding=self.encoding) as file:
+                result[file_name] = file.readlines()
+        return result
+
     def read_files(self, file_names: list) -> dict:
         result = dict()
         for file_name in file_names:
-            result[file_name] = self.read_file(file_name)
+            file_content = self.read_file(file_name)
+            result[file_name] = file_content
         return result
 
     def read_file(self, file_name: str) -> list:
         with open(file=os.path.join(self.input_dir, file_name), encoding=self.encoding) as file:
-            result = file.readlines()
+            result = file.read()
         return result
 
     def write_file(self, json_name: str, json_content):

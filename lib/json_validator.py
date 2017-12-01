@@ -15,7 +15,7 @@ class JsonValidator(object):
         self.output = str()
         self.sign_stack = list()
 
-    def validate(self, json: list):
+    def validate_lines(self, json: list):
         self.validate_not_empty(json)
         for i in range(0, len(json)):
             for j in range(0, len(json[i])):
@@ -28,6 +28,25 @@ class JsonValidator(object):
                 except Exception as e:
                     self.clean()
                     raise JsonValidateError(ErrorMsg.unknown_error.format(str(e), i, j))
+        if not is_empty(self.buffer) or not is_empty(self.sign_stack):
+            self.clean()
+            raise JsonValidateError(ErrorMsg.open_sign_error)
+        result = self.output
+        self.clean()
+        return result
+
+    def validate_str(self, json: str):
+        if is_empty(json):
+            raise JsonValidateError(ErrorMsg.empty_error)
+        for i in range(0, len(json)):
+            try:
+                self.insert(json[i])
+            except JsonValidateError as e:
+                self.clean()
+                raise JsonValidateError(ErrorMsg.error_format.format(str(e), 0, i))
+            except Exception as e:
+                self.clean()
+                raise JsonValidateError(ErrorMsg.unknown_error.format(str(e), 0, i))
         if not is_empty(self.buffer) or not is_empty(self.sign_stack):
             self.clean()
             raise JsonValidateError(ErrorMsg.open_sign_error)

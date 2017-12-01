@@ -38,7 +38,7 @@ def build(buffer: list):
                         continue
                 output += "\\"
                 output += buffer[i]
-            logging.info("change {} to {}".format("".join(buffer), output + top(buffer)))
+            logging.warning("change {} to {}".format("".join(buffer), output + top(buffer)))
         output += top(buffer)
     else:
         raise JsonValidateError(ErrorMsg.syntax_error)
