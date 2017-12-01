@@ -24,4 +24,4 @@ for json_name, json_content in json_dict.items():
         file_manager.write_file(json_name, output_json)
         logging.info("Verify success, output file:\n{}".format(os.path.join(output_path, json_name)))
     except JsonValidateError as e:
-        logging.error("Verify error, output file:\n{}\nerror message: {}".format(os.path.join(output_path,json_name),str(e)))
+        logging.error("Verify fail, output file:\n{}\nerror message: {}".format(os.path.join(output_path,json_name),str(e)))
