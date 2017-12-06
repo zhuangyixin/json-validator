@@ -30,12 +30,12 @@ def build(buffer: list):
         output = buffer[0]
         if buffer_len > 2:
             for i in range(1, buffer_len - 1):
-                if i < buffer_len - 2 and buffer[i] == "\\":
-                    if buffer[i + 1][0] in "\"":
-                        continue
-                    elif buffer[i + 1][0] in "\\":
-                        output += buffer[i]
-                        continue
+                # if i < buffer_len - 2 and buffer[i] == "\\":
+                #     if buffer[i + 1][0] in "\"":
+                #         continue
+                #     elif buffer[i + 1][0] in "\\":
+                #         output += buffer[i]
+                #         continue
                 output += "\\"
                 output += buffer[i]
             logging.warning("change {} to {}".format("".join(buffer), output + top(buffer)))

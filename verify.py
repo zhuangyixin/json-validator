@@ -19,7 +19,7 @@ fail_file_names = list()
 success_file_names = list()
 for json_name, json_content in json_dict.items():
     try:
-        output_json = validator.validate_str(json_content)
+        output_json = validator.validate(json_content)
         file_manager.write_file(json_name, output_json)
         success_file_names.append(json_name)
         # logging.info("Verify success, output file:\n{}".format(os.path.join(output_path, json_name)))

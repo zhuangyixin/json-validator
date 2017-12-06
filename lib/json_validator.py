@@ -35,7 +35,7 @@ class JsonValidator(object):
         self.clean()
         return result
 
-    def validate_str(self, json: str):
+    def validate(self, json: str):
         if is_empty(json):
             raise JsonValidateError(ErrorMsg.empty_error)
         for i in range(0, len(json)):
